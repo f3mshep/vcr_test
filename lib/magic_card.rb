@@ -2,8 +2,7 @@ require "httparty"
 
 class MagicCard
 
-  MULTIVERSE_RULING_URL = "https://api.scryfall.com/cards/multiverse/"
-  PRETEND_HEADER = {test_api_key: "abc123"}
+  MULTIVERSE_URL = "https://api.scryfall.com/cards/multiverse/"
 
   attr_accessor :name, :card_id, :cmc
 
@@ -12,14 +11,9 @@ class MagicCard
   end
 
   def get_card_info
-    resp = HTTParty.get("#{MULTIVERSE_RULING_URL}/#{card_id}")
+    resp = HTTParty.get("#{MULTIVERSE_URL}/#{card_id}")
     self.name = resp["name"]
     self.cmc = resp["cmc"]
-  end
-
-  def get_card_info_with_header
-    resp = HTTParty.get("#{MULTIVERSE_RULING_URL}/#{card_id}", headers: PRETEND_HEADER)
-    self.name = resp["name"]
   end
 
 end
